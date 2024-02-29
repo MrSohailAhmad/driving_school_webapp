@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 
-const SelectGroupTwo: React.FC = () => {
-  const [selectedOption, setSelectedOption] = useState<string>('');
+const SelectOption: React.FC = ({
+  title,
+  option,
+}: {
+  title: any;
+  option: any;
+}) => {
+  const [selectedOption, setSelectedOption] = useState<string>(option);
   const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
-
+  console.log(selectedOption);
   const changeTextColor = () => {
     setIsOptionSelected(true);
   };
 
   return (
     <div>
-      <label className="mb-3 block text-black dark:text-white">
-        Select Country
-      </label>
+      <label className="mb-3 block text-black dark:text-white">{title}</label>
 
-      <div className="relative z-20 bg-white dark:bg-form-input">
-        <span className="absolute top-1/2 left-4 z-30 -translate-y-1/2">
+      <div className="relative z-20 bg-gray-50 dark:bg-form-input">
+        {/* <span className="absolute top-1/2 left-4 z-30 -translate-y-1/2">
           <svg
             width="20"
             height="20"
@@ -44,7 +48,7 @@ const SelectGroupTwo: React.FC = () => {
               ></path>
             </g>
           </svg>
-        </span>
+        </span> */}
 
         <select
           value={selectedOption}
@@ -52,22 +56,18 @@ const SelectGroupTwo: React.FC = () => {
             setSelectedOption(e.target.value);
             changeTextColor();
           }}
-          className={`relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input ${
+          className={`relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-6 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input ${
             isOptionSelected ? 'text-black dark:text-white' : ''
           }`}
         >
           <option value="" disabled className="text-body dark:text-bodydark">
-            Select Country
+            Select Vehicle
           </option>
-          <option value="USA" className="text-body dark:text-bodydark">
-            USA
-          </option>
-          <option value="UK" className="text-body dark:text-bodydark">
-            UK
-          </option>
-          <option value="Canada" className="text-body dark:text-bodydark">
-            Canada
-          </option>
+          {option.map((el: []) => (
+            <option value={el} className="text-body dark:text-bodydark">
+              {el}
+            </option>
+          ))}
         </select>
 
         <span className="absolute top-1/2 right-4 z-10 -translate-y-1/2">
@@ -93,4 +93,4 @@ const SelectGroupTwo: React.FC = () => {
   );
 };
 
-export default SelectGroupTwo;
+export default SelectOption;

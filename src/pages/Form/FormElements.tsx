@@ -11,14 +11,13 @@ import SwitcherTwo from '../../components/Switchers/SwitcherTwo';
 import DefaultLayout from '../../layout/DefaultLayout';
 import DatePickerOne from '../../components/Forms/DatePicker/DatePickerOne';
 import DatePickerTwo from '../../components/Forms/DatePicker/DatePickerTwo';
-import SelectGroupTwo from '../../components/Forms/SelectGroup/SelectGroupTwo';
+import SelectOption from '../../components/Forms/SelectGroup/SelectOption';
 import MultiSelect from '../../components/Forms/MultiSelect';
 
 const FormElements = () => {
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Form Elements" />
-
       <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
         <div className="flex flex-col gap-9">
           {/* <!-- Input Fields --> */}
@@ -193,7 +192,7 @@ const FormElements = () => {
               </h3>
             </div>
             <div className="flex flex-col gap-5.5 p-6.5">
-              <SelectGroupTwo />
+              <SelectOption />
               <MultiSelect id="multiSelect" />
             </div>
           </div>
