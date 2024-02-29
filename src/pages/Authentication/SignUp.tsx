@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SelectOption from '../../components/Forms/SelectGroup/SelectOption.tsx';
 
 const SignUp: React.FC = () => {
+  const initialState = {
+    firstName: '',
+    lastName: '',
+    userName: '',
+    email: '',
+    phoneNumber: '',
+    vehicle: '',
+    picture: '',
+    certificate: '',
+    password: '',
+    cpassword: '',
+  };
   const listOption = ['Car', 'Bike'];
+  const [option, setOption] = useState<any>(listOption);
+  const [user, setUser] = useState<object>(initialState);
+
+  console.log(user);
 
   return (
     <div className="flex flex-wrap items-center justify-center">
@@ -21,6 +37,14 @@ const SignUp: React.FC = () => {
               </label>
               <div className="relative">
                 <input
+                  value={user.firstName}
+                  onChange={(e) =>
+                    setUser((prevState) => ({
+                      ...prevState,
+                      [e.target.name]: e.target.value,
+                    }))
+                  }
+                  name="firstName"
                   type="text"
                   placeholder="Enter your first name"
                   className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -55,6 +79,14 @@ const SignUp: React.FC = () => {
               </label>
               <div className="relative">
                 <input
+                  value={user.lastName}
+                  onChange={(e) =>
+                    setUser((prevState) => ({
+                      ...prevState,
+                      [e.target.name]: e.target.value,
+                    }))
+                  }
+                  name="lastName"
                   type="text"
                   placeholder="Enter your last name"
                   className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -89,7 +121,15 @@ const SignUp: React.FC = () => {
               </label>
               <div className="relative">
                 <input
+                  value={user.userName}
+                  onChange={(e) =>
+                    setUser((prevState) => ({
+                      ...prevState,
+                      [e.target.name]: e.target.value,
+                    }))
+                  }
                   type="text"
+                  name="userName"
                   placeholder="Enter your user name"
                   className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                 />
@@ -117,13 +157,20 @@ const SignUp: React.FC = () => {
                 </span>
               </div>
             </div>
-
             <div className="mb-4">
               <label className="mb-2.5 block font-medium text-black dark:text-white">
                 Phone Number
               </label>
               <div className="relative">
                 <input
+                  value={user.phoneNumber}
+                  onChange={(e) =>
+                    setUser((prevState) => ({
+                      ...prevState,
+                      [e.target.name]: e.target.value,
+                    }))
+                  }
+                  name="phoneNumber"
                   type="number"
                   placeholder="Enter your Phone Number"
                   className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -158,6 +205,14 @@ const SignUp: React.FC = () => {
               </label>
               <div className="relative">
                 <input
+                  value={user.email}
+                  onChange={(e) =>
+                    setUser((prevState) => ({
+                      ...prevState,
+                      [e.target.name]: e.target.value,
+                    }))
+                  }
+                  name="email"
                   type="email"
                   placeholder="Enter your email"
                   className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -183,15 +238,75 @@ const SignUp: React.FC = () => {
               </div>
             </div>
             <div className="mb-4">
-              <SelectOption title="Select your vehicle" option={listOption} />
+              <SelectOption
+                title="Select your vehicle"
+                option={option}
+                setOption={(e) =>
+                  setUser((prevState) => ({
+                    ...prevState,
+                    ['vehicle']: e,
+                  }))
+                }
+                onChange={
+                  (e) => console.log(e)
+                  // setUser((prevState) => ({
+                  //   ...prevState,
+                  //   [e.target.name]: e.target.value,
+                  // }))
+                }
+                // name="phoneNumber"
+              />
             </div>
-
+            <div>
+              <label className="mb-3 block text-black dark:text-white">
+                Upload Profile Picture
+              </label>
+              <input
+                value={user.picture}
+                onChange={
+                  (e) => console.log(e)
+                  // setUser((prevState) => ({
+                  //   ...prevState,
+                  //   [e.target.name]: e.target.value,
+                  // }))
+                }
+                name="picture"
+                type="file"
+                className="w-full rounded-md border border-stroke p-3 outline-none transition file:mr-4 file:rounded file:border-[0.5px] file:border-stroke file:bg-[#EEEEEE] file:py-1 file:px-2.5 file:text-sm focus:border-primary file:focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:file:border-strokedark dark:file:bg-white/30 dark:file:text-white"
+              />
+            </div>{' '}
+            <div>
+              <label className="mb-3 block text-black dark:text-white">
+                Upload Fitness Certificate
+              </label>
+              <input
+                value={user.certificate}
+                onChange={
+                  (e) => console.log(e)
+                  // setUser((prevState) => ({
+                  //   ...prevState,
+                  //   [e.target.name]: e.target.value,
+                  // }))
+                }
+                name="certificate"
+                type="file"
+                className="w-full rounded-md border border-stroke p-3 outline-none transition file:mr-4 file:rounded file:border-[0.5px] file:border-stroke file:bg-[#EEEEEE] file:py-1 file:px-2.5 file:text-sm focus:border-primary file:focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:file:border-strokedark dark:file:bg-white/30 dark:file:text-white"
+              />
+            </div>
             <div className="mb-4">
               <label className="mb-2.5 block font-medium text-black dark:text-white">
                 Password
               </label>
               <div className="relative">
                 <input
+                  value={user.password}
+                  onChange={(e) =>
+                    setUser((prevState) => ({
+                      ...prevState,
+                      [e.target.name]: e.target.value,
+                    }))
+                  }
+                  name="password"
                   type="password"
                   placeholder="Enter your password"
                   className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -220,13 +335,20 @@ const SignUp: React.FC = () => {
                 </span>
               </div>
             </div>
-
             <div className="mb-6">
               <label className="mb-2.5 block font-medium text-black dark:text-white">
                 Re-type Password
               </label>
               <div className="relative">
                 <input
+                  value={user.cpassword}
+                  onChange={(e) =>
+                    setUser((prevState) => ({
+                      ...prevState,
+                      [e.target.name]: e.target.value,
+                    }))
+                  }
+                  name="cpassword"
                   type="password"
                   placeholder="Re-enter your password"
                   className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -255,7 +377,6 @@ const SignUp: React.FC = () => {
                 </span>
               </div>
             </div>
-
             <div className="mb-5">
               <input
                 type="submit"
@@ -263,7 +384,6 @@ const SignUp: React.FC = () => {
                 className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
               />
             </div>
-
             <div className="mt-6 text-center">
               <p>
                 Already have an account?{' '}

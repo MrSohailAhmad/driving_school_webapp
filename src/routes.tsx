@@ -1,19 +1,19 @@
 import { Navigate } from 'react-router-dom';
 // files
-
-import PageTitle from './components/PageTitle';
+// import PageTitle from './components/PageTitle';
 import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
-import Calendar from './pages/Calendar';
-import Chart from './pages/Chart';
-import ECommerce from './pages/Dashboard/ECommerce';
-import FormElements from './pages/Form/FormElements';
-import FormLayout from './pages/Form/FormLayout';
+// import Calendar from './pages/Calendar';
+// import Chart from './pages/Chart';
+import Dashboard from './pages/Dashboard/DashBoard';
 import Profile from './pages/Profile';
-import Settings from './pages/Settings';
-import Tables from './pages/Tables';
-import Alerts from './pages/UiElements/Alerts';
-import Buttons from './pages/UiElements/Buttons';
+// import FormElements from './pages/Form/FormElements';
+// import FormLayout from './pages/Form/FormLayout';
+// import Profile from './pages/Profile';
+// import Settings from './pages/Settings';
+// import Tables from './pages/Tables';
+// import Alerts from './pages/UiElements/Alerts';
+// import Buttons from './pages/UiElements/Buttons';
 // const routes = () => {
 //   // const { pathname } = useLocation();
 
@@ -145,6 +145,18 @@ const routes = () => [
   {
     path: 'signup',
     element: <SignUp />,
+  },
+  {
+    path: 'dashboard',
+    element: <Dashboard />,
+  },
+  {
+    path: 'users',
+    element: <Dashboard />,
+  },
+  {
+    path: 'profile',
+    element: <Profile />,
   },
 ];
 

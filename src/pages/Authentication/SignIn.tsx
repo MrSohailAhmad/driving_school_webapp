@@ -1,7 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { loginUserApi } from '../../redux/users/users.api.js';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/users/userSlice.js';
+interface UserState {
+  userName: string;
+  password: string;
+}
 
 const SignIn: React.FC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const initialState: interface = {
+    userName: '',
+    password: '',
+  };
+  const [user, setUserState] = useState<UserState>(initialState);
+  const loginUser: Function = async (e: any) => {
+    e.preventDefault();
+    const { data } = await loginUserApi(user);
+    console.log(data);
+
+    // Ensure that the user state always includes userName and password properties
+    const updatedUser = data;
+
+    setUserState(updatedUser);
+    dispatch(setUser(updatedUser));
+    navigate('/dashboard');
+  };
+
+  console.log(user);
+
   return (
     <div className="flex  w-full !h-[100%] !items-center justify-center">
       <div className=" h-full xl:w-1/2 ">
@@ -18,7 +47,14 @@ const SignIn: React.FC = () => {
               </label>
               <div className="relative">
                 <input
-                  type="email"
+                  value={user.userName}
+                  type="text"
+                  onChange={(e) =>
+                    setUserState((prevState) => ({
+                      ...prevState,
+                      userName: e.target.value,
+                    }))
+                  }
                   placeholder="Enter your email"
                   className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                 />
@@ -49,7 +85,14 @@ const SignIn: React.FC = () => {
               </label>
               <div className="relative">
                 <input
+                  value={user.password}
                   type="password"
+                  onChange={(e) =>
+                    setUserState((prevState) => ({
+                      ...prevState,
+                      password: e.target.value,
+                    }))
+                  }
                   placeholder="6+ Characters, 1 Capital letter"
                   className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                 />
@@ -79,11 +122,17 @@ const SignIn: React.FC = () => {
             </div>
 
             <div className="mb-5">
-              <input
+              <button
+                onClick={loginUser}
+                className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
+              >
+                LOGIN
+              </button>
+              {/* <input
                 type="submit"
                 value="Sign In"
                 className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-              />
+              /> */}
             </div>
 
             <div className="mt-6 text-center">
